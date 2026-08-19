@@ -1,0 +1,205 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[brazil]{babel}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{xcolor}
+\usepackage{ruby}
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+\setmainfont{Latin Modern Roman}
+\setCJKmainfont{Noto Serif CJK JP}
+
+\definecolor{jpnavy}{RGB}{20, 35, 60}
+\definecolor{jpred}{RGB}{180, 40, 40}
+\definecolor{lighthight}{RGB}{245, 247, 250}
+\definecolor{jppurple}{RGB}{110, 70, 120}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+    \includegraphics[height=2cm, keepaspectratio]{../Seishun.png}\\
+    \vspace{0.3cm}
+    {\LARGE\bfseries 第四課}\\[4pt]
+    \small Compras
+\end{center}
+
+\vspace{0.3cm}
+\hrule height 1pt
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=jppurple!6, colframe=jppurple, title=\textbf{Dica Cultural}, fonttitle=\bfseries]
+\small
+No japonês, os demonstrativos seguem a regra do **KO-SO-A-DO** dependendo da distância em relação ao falante e ao ouvinte:
+\begin{itemize}[leftmargin=*, topsep=2pt, itemsep=1pt]
+    \item \textbf{KO (これ / ここ):} Perto do **falante** (Isto / Aqui).
+    \item \textbf{SO (それ / そこ):} Perto do **ouvinte** (Isso / Aí).
+    \item \textbf{A (あれ / あそこ):} Longe de **ambos** (Aquilo / Lá).
+    \item \textbf{DO (どれ / どこ):} Interrogação (Qual? / Onde?).
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.2cm}
+
+\subsection*{Sistemas de Números (\textit{Sūji})}
+
+Diferente do português que agrupa grandes números de $3$ em $3$ zeros ($1.000 = \text{mil}$, $1.000.000 = \text{milhão}$), o japonês agrupa a partir de $10.000$ em blocos de $4$ zeros (\textbf{万 - man}).
+
+\vspace{0.2cm}
+
+\noindent
+\small
+\begin{tabularx}{\textwidth}{>{\bfseries\color{jpnavy}}l l X}
+\toprule
+Número & Kanji / Kana & Romaji \\
+\midrule
+0 & ゼロ / 零 & zero / rei \\
+1 -- 5 & 一, 二, 三, 四, 五 & ichi, ni, san, yon/shi, go \\
+6 -- 10 & 六, 七, 八, 九, 十 & roku, nana/shichi, hachi, kyū/ku, jū \\
+\midrule
+100 & 百 (ひゃく) & hyaku \\
+1.000 & 千 (せん) & sen \\
+10.000 & 一万 (いちまん) & ichi-man \\
+100.000 & 十万 (じゅうまん) & jū-man \\
+1.000.000 & 百万 (ひゃくまん) & hyaku-man \\
+100.000.000 & 一億 (いちおく) & ichi-oku (\textit{base de 8 zeros}) \\
+1.000.000.000.000 & 一兆 (いっちょう) & icchō (\textit{base de 12 zeros}) \\
+\bottomrule
+\end{tabularx}
+
+\newpage
+
+\begin{center}
+    {\LARGE\bfseries 会話 (Diálogo na Konbini)}
+\end{center}
+
+\textit{Cenário: Risa entra em uma loja de conveniência (Konbini) procurando algo para comer e pedindo informações ao atendente (Ten'in).}
+
+\vspace{0.8em}
+
+\textbf{リサ:} あのう、すみません。\ruby{石鹸}{せっけん}はどこですか。\\
+\textit{Risa:} Anou, sumimasen. Sekken wa doko desu ka?\\
+Risa: Com licença... onde fica o sabonete?
+
+\vspace{0.5em}
+
+\textbf{\ruby{店員}{てんいん}:} えーと、あそこです。\ruby{レジ}{れじ}の\ruby{前}{まえ}です。\\
+\textit{Ten'in:} Eeto, asoko desu. Reji no mae desu.\\
+Atendente: Vejamos... fica ali. Em frente ao caixa.
+
+\vspace{0.5em}
+
+\textbf{リサ:} あそこ？レジの\ruby{前}{まえ}ですね。どうも。\\
+\textit{Risa:} Asoko? Reji no mae desu ne. Doumo.\\
+Risa: Ali? Em frente ao caixa, né? Obrigada.
+
+\vspace{0.8em}
+\textit{(Risa vai até o balcão de produtos alimentícios)}
+\vspace{0.8em}
+
+\textbf{リサ:} パンはありますか。お\ruby{弁当}{べんとう}は？\\
+\textit{Risa:} Pan wa arimasu ka? O-bentou wa?\\
+Risa: Tem pão? E marmita (obentou)?
+
+\vspace{0.5em}
+
+\textbf{\ruby{店員}{てんいん}:} はい、こちらにあります。\\
+\textit{Ten'in:} Hai, kochira ni arimasu.\\
+Atendente: Sim, temos por aqui.
+
+\vspace{0.5em}
+
+\textbf{リサ:} お\ruby{箸}{はし}はありますか。あと、\ruby{飲み物}{のみもの}も...\\
+\textit{Risa:} O-hashi wa arimasu ka? Ato, nomimono mo...\\
+Risa: Tem hashis (palitos)? E também bebidas...
+
+\vspace{0.5em}
+
+\textbf{リサ:} これ、ください。いくらですか。\\
+\textit{Risa:} Kore, kudasai. Ikura desu ka?\\
+Risa: Por favor, me dê isto. Quanto custa?
+
+\vspace{0.5em}
+
+\textbf{\ruby{店員}{てんいん}:} はい。220\ruby{円}{えん}です。\\
+\textit{Ten'in:} Hai. Ni-hyaku ni-jū en desu.\\
+Atendente: Pois não. São 220 ienes.
+
+\vspace{0.5em}
+
+\textbf{リサ:} はい、どうぞ。あのう、ここで\ruby{食}{た}べてもいいですか。\\
+\textit{Risa:} Hai, douzo. Anou, koko de tabete mo ii desu ka?\\
+Risa: Aqui está. Hum, posso comer aqui?
+
+\vspace{0.5em}
+
+\textbf{\ruby{店員}{てんいん}:} ええ、イートインスペースへどうぞ。\\
+\textit{Ten'in:} Ee, iitoin supēsu e douzo.\\
+Atendente: Sim, fique à vontade na área de refeição.
+
+\vspace{0.5em}
+
+\textbf{リサ:} あと、すみません、トイレはどこですか。\\
+\textit{Risa:} Ato, sumimasen, toire wa doko desu ka?\\
+Risa: E, com licença, onde fica o banheiro?
+
+\vspace{0.5em}
+
+\textbf{\ruby{店員}{てんいん}:} トイレはあちらの\ruby{奥}{おく}です。\\
+\textit{Ten'in:} Toire wa achira no oku desu.\\
+Atendente: O banheiro fica ao fundo, naquela direção.
+
+\newpage
+
+\subsection*{Vocabulário Útil para Prática (\textit{Tango})}
+
+\vspace{0.2cm}
+
+\noindent
+\small
+\begin{tabularx}{\textwidth}{>{\bfseries\color{jpnavy}}l X X}
+\toprule
+Palavra (Romaji) & Kanji / Kana & Tradução em Português \\
+\midrule
+Konpyūta & コンピュータ & Computador \\
+Nōto-pakoson & ノートパソコン & Laptop / Notebook \\
+Hon & 本 (ほん) & Livro \\
+Suniikā / Kutsu & スニーカー / 靴 (くつ) & Tênis / Sapatos \\
+Shatsu / Burausu & シャツ / ブラウス & Camiseta / Blusa \\
+Zubon / Pantsu & ズボン / パンツ & Calça \\
+Shorutsu / Hanpan & ショーツ / 短パン (たんぱん) & Shorts / Bermudas \\
+Tee-shatsu & Tシャツ & Camiseta (T-shirt) \\
+Kokuban & 黒板 (こくばん) & Lousa / Quadro negro \\
+Mausu & マウス & Mouse \\
+Kiibōdo & キーボード & Teclado \\
+Enpitsu & 鉛筆 (えんぴつ) & Lápis \\
+Keshigomu & 消しゴム (けしごむ) & Borracha \\
+Pen / Bōrupen & ペン / ボールペン & Caneta / Caneta esferográfica \\
+Sumātofon (Sumaho) & スマートフォン (スマホ) & Smartphone \\
+\bottomrule
+\end{tabularx}
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=jppurple!6, colframe=jppurple, title=\textbf{Dinâmica em Grupo (Prática Presencial)}, fonttitle=\bfseries]
+\small
+Em duplas, utilizem os objetos que vocês têm na mesa/mochila e a infraestrutura do laboratório para praticar:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Jogo dos Objetos:} Aponte para um objeto seu ou do colega (celular, caneta, livro, computador) e pergunte \textit{"Kore/Sore/Are wa nan desu ka?"}. O colega deve responder usando a distância correta.
+    \item \textbf{Guia do Campus:} Um aluno faz o papel de visitante e pergunta onde ficam locais da faculdade (ex: \textit{Toire}, \textit{Toshokan}, \textit{Kyoushitsu}). O outro responde indicando a direção (\textit{Koko}, \textit{Soko}, \textit{Asoko}).
+\end{enumerate}
+\end{tcolorbox}
+
+\vspace{0.4cm}
+
+\begin{center}
+    \small\color{gray} \textit{お疲れ様でした！ (Otsukaresama deshita!)}
+\end{center}
+
+\end{document}

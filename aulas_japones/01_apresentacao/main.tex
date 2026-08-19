@@ -5,22 +5,261 @@
 \usepackage{xeCJK}
 \usepackage{xcolor}
 \usepackage{ruby}
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{booktabs}
 
 \setmainfont{Latin Modern Roman}
 \setCJKmainfont{Noto Serif CJK JP}
 
+\definecolor{jpnavy}{RGB}{20, 35, 60}
+\definecolor{jpred}{RGB}{180, 40, 40}
+\definecolor{lighthight}{RGB}{245, 247, 250}
+\definecolor{jppurple}{RGB}{110, 70, 120}
+
+\pagestyle{empty}
+
 \begin{document}
 
-Fazer uma média com os alunos para ver o nível.
 
-O que é katakana, hiragana, romaji e kanji.
+\begin{center}
+    \includegraphics[height=2cm, keepaspectratio]{../Seishun.png}\\
+    \vspace{0.3cm}
+    {\LARGE\bfseries 第一課}\\[4pt]
+    \small Jikoshoukai e Identidade
+\end{center}
 
-Demonstrar como são montadas as frases em japonês.
+\vspace{0.3cm}
+\hrule height 1pt
+\vspace{0.5cm}
 
-Começar a parte de apresentação.
-\ruby{私}{わたし}は = eu sou
+\begin{tcolorbox}[colback=jppurple!6, colframe=jppurple, title=\textbf{Dica Cultural}, fonttitle=\bfseries]
+\small
+Nesta primeira aula, o foco é realizar sua primeira auto-introdução em japonês (\textbf{自己紹介 --- Jikoshoukai}). 
+\begin{itemize}[leftmargin=*, topsep=2pt, itemsep=1pt]
+    \item \textbf{Ojigi (お辞儀):} Ao cumprimentar no Japão, é comum inclinar levemente o tronco para frente em sinal de respeito.
+    \item \textbf{Meishi (名刺):} O cartão de visitas é muito importante no mundo corporativo japonês. Receba-o sempre com as duas mãos e leia-o com atenção.
+    \item \textbf{Yoroshiku onegaishimasu:} Expressão chave que significa algo como ``Conto com sua colaboração'' ou ``Prazer em conhecê-lo(a)''.
+\end{itemize}
+\end{tcolorbox}
 
+\subsection*{Introdução ao idioma japonês}
 
+O japonês utiliza três sistemas principais de escrita:
 
-\ruby{Omae}{おまえ}\ \ruby{no}{の}\ \ruby{namae}{なまえ}\ \ruby{wa}{は}?
+\begin{itemize}[leftmargin=*]
+    \item \textbf{ひらがな (Hiragana)}: Alfabeto base para palavras nativas, terminações verbais e partículas.
+    
+    Exemplo: わたし (watashi) = Eu
+
+    \item \textbf{カタカナ (Katakana)}: Usado para palavras e nomes estrangeiros ou destaque.
+
+    Exemplo: ワタシ (watashi) = Eu / マリオ (Mario) = Mário
+
+    \item \textbf{漢字 (Kanji)}: Caracteres de origem chinesa que representam ideias/significados.
+
+    Exemplo: \ruby{私}{わたし} (watashi) = Eu
+\end{itemize}
+
+\textbf{Romaji (ローマ字):} A escrita utilizando o alfabeto romano (ex: \textit{Watashi = Eu}). 
+
+\subsection*{Estrutura Básica \& Partículas}
+
+A estrutura fundamental do japonês é: \begin{center} $\text{Tópico} + \text{Informação} + \text{Verbo/Desu}$. \end{center}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{は (wa):} Marca o tópico principal (sobre quem/o que se fala).\\
+    \textit{Ex:} \ruby{私}{わたし}はブラジル\ruby{人}{じん}です。(Watashi wa Burajirujin desu. = Eu sou brasileiro.)
+    
+    \item \textbf{の (no):} Indica posse, origem ou relação.\\
+    \textit{Ex:} UTFPRの\ruby{学生}{がくせい}です。(UTFPR no gakusei desu. = Sou estudante da UTFPR.)
+
+    \item \textbf{です (desu):} Verbo de ligação de polidez (Ser/Estar/É/Sou).
+    
+    \item \textbf{か (ka):} Partícula interrogativa colocada no final da frase ($?$).
+\end{itemize}
+
+\newpage
+
+\begin{center}
+    {\LARGE\bfseries 会話 (Diálogo de Apresentação)}
+\end{center}
+
+\textit{Cenário: Mário (engenheiro estrangeiro) e Takahashi (advogada) se encontram na recepção de um edifício comercial em Tóquio.}
+
+\vspace{0.8em}
+
+\textbf{マリオ:} こんにちは。はじめまして。\\
+\textit{Mario:} Konnichiwa. Hajimemashite.\\
+Mário: Boa tarde. Muito prazer em conhecê-la.
+
+\vspace{0.5em}
+
+\textbf{\ruby{高橋}{たかはし}:} あ、こんにちは。\\
+\textit{Takahashi:} A, konnichiwa.\\
+Takahashi: Ah, boa tarde.
+
+\vspace{0.5em}
+
+\textbf{マリオ:} わたしはマリオです。どうぞよろしく。\\
+\textit{Mario:} Watashi wa Mario desu. Douzo yoroshiku.\\
+Mário: Meu nome é Mário. Muito prazer.
+
+\vspace{0.5em}
+
+\textbf{\ruby{高橋}{たかはし}:} は？\\
+\textit{Takahashi:} Ha?\\
+Takahashi: Hã?
+
+\vspace{0.5em}
+
+\textbf{マリオ:} マ・リ・オです。\\
+\textit{Mario:} Ma-ri-o desu.\\
+Mário: Má-ri-o.
+
+\vspace{0.5em}
+
+\textbf{\ruby{高橋}{たかはし}:} マリオさん。\\
+\textit{Takahashi:} Mario-san.\\
+Takahashi: Senhor Mário.
+
+\vspace{0.5em}
+
+\textbf{マリオ:} そうです。あのう、お\ruby{名前}{なまえ}は？\\
+\textit{Mario:} Sou desu. Anou, o-namae wa?\\
+Mário: Isso mesmo. Hum... qual é o seu nome?
+
+\vspace{0.5em}
+
+\textbf{\ruby{高橋}{たかはし}:} \ruby{私}{わたし}は\ruby{高橋}{たかはし}です。\\
+\textit{Takahashi:} Watashi wa Takahashi desu.\\
+Takahashi: Eu sou Takahashi.
+
+\vspace{0.5em}
+
+\textbf{マリオ:} た・か?\\
+\textit{Mario:} Ta-ka?\\
+Mário: Ta... ka?
+
+\vspace{0.5em}
+
+\textbf{\ruby{高橋}{たかはし}:} た・か・は・し。\\
+\textit{Takahashi:} Ta-ka-ha-shi.\\
+Takahashi: Ta-ka-ha-shi.
+
+\vspace{0.3em}
+\textit{(Takahashi tira um cartão de visitas do bolso e o entrega a Mário com as duas mãos.)}
+\vspace{0.3em}
+
+\textbf{\ruby{高橋}{たかはし}:} どうぞ。\ruby{弁護士}{べんごし}の\ruby{高橋}{たかはし}です。\\
+\textit{Takahashi:} Douzo. Bengoshi no Takahashi desu.\\
+Takahashi: Aqui está. Sou Takahashi, advogada.
+
+\vspace{0.5em}
+
+\textbf{マリオ:} あ、どうも。\ruby{高橋}{たかはし}さんは\ruby{弁護士}{べんごし}ですね。\\
+\textit{Mario:} A, doumo. Takahashi-san wa bengoshi desu ne.\\
+Mário: Ah, muito obrigado. Então a senhora é advogada.
+
+\vspace{0.5em}
+
+\textbf{\ruby{高橋}{たかはし}:} ええ。マリオさんのお\ruby{仕事}{しごと}は？\\
+\textit{Takahashi:} Ee. Mario-san no o-shigoto wa?\\
+Takahashi: Sim. E qual é o seu trabalho, Mário?
+
+\vspace{0.5em}
+
+\textbf{マリオ:} \ruby{私}{わたし}はITのエンジニアです。\\
+\textit{Mario:} Watashi wa aitee no enjinia desu.\\
+Mário: Eu sou engenheiro de TI.
+
+\vspace{0.5em}
+
+\textbf{\ruby{高橋}{たかはし}:} そうですか！ここで何をして​​いますか？\\
+\textit{Takahashi:} Sou desu ka! Koko de nani wo shite imasu ka?\\
+Takahashi: É mesmo?! O que está fazendo aqui?
+
+\vspace{0.5em}
+
+\textbf{マリオ:} \ruby{今日}{きょう}は\ruby{大学}{だいがく}の\ruby{友達}{ともだち}と\ruby{約束}{やくそく}があります。高橋さんは？\\
+\textit{Mario:} Kyou wa daigaku no tomodachi to yakusoku ga arimasu. Takahashi-san wa?\\
+Mário: Hoje tenho um compromisso com um amigo da faculdade. E a senhora?
+
+\vspace{0.5em}
+
+\textbf{\ruby{高橋}{たかはし}:} \ruby{私}{わたし}も\ruby{仕事}{しごと}の\ruby{打}{う}ち\ruby{合}{あ}わせです。じゃあ、また！\\
+\textit{Takahashi:} Watashi mo shigoto no uchiawase desu. Jaa, mata!\\
+Takahashi: Eu também tenho uma reunião de trabalho. Bom, até mais!
+
+\vspace{0.5em}
+
+\textbf{マリオ:} はい、失礼します！\\
+\textit{Mario:} Hai, shitsurei shimasu!\\
+Mário: Sim, com licença!
+
+\newpage
+
+\subsection*{Vocabulário Útil para Prática (\textit{Tango})}
+
+\vspace{0.2cm}
+
+\noindent
+\small
+\begin{tabularx}{\textwidth}{>{\bfseries\color{jpnavy}}l X X}
+\toprule
+Palavra (Romaji) & Kanji / Kana & Tradução em Português \\
+\midrule
+Watashi / Boku & 私 / 僕 & Eu (Geral / Informal masculino) \\
+Anata & あなた & Você \\
+O-namae wa? & お名前は？ & Qual é o seu nome? \\
+O-shigoto wa? & お仕事は？ & Qual o seu trabalho / profissão? \\
+\midrule
+
+Bengoshi & 弁護士 (べんごし) & Advogado(a) \\
+Enjinia & エンジニア & Engenheiro(a) \\
+Puroguramā & プログラマー & Programador(a) \\
+Kikai kōgaku & 機械工学 (きかいこうがく) & Engenharia Mecânica \\
+Denki kōgaku & 電気工学 (でんきこうがく) & Engenharia Elétrica \\
+Denshi kōgaku & 電子工学 (でんしこうがく) & Engenharia Eletrônica \\
+Jidōka kōgaku & 自動化工学 (じどうかこうがく) & Engenharia de Automação \\
+Konpyūta kōgaku & コンピュータ工学 (こんぴゅーたこうがく) & Engenharia da Computação \\
+Sūgaku kyōiku & 数学教育 (すうがくきょういく) & Licenciatura em Matemática \\
+\midrule
+
+Gakusei & 学生 (がくせい) & Estudante (Geral) \\
+Shōgakusei & 小学生 (しょうがくせい) & Ensino Fundamental I \\
+Chūgakusei & 中学生 (ちゅうがくせい) & Ensino Fundamental II \\
+Kōkōsei & 高校生 (こうこうせい) & Ensino Médio \\
+Daigakusei & 大学生 (だいがくせい) & Estudante Universitário(a) \\
+\midrule
+
+Sensei & 先生 (せんせい) & Professor(a) / Mestre \\
+Arubaito & アルバイト & Trabalhador(a) de meio período \\
+Ten'in & 店員 (てんいん) & Atendente de loja \\
+Ātisuto & アーティスト & Artista \\
+Kigyōka & 起業家 (きぎょうか) & Empreendedor(a) \\
+Biyōshi & 美容師 (びようし) & Cabeleireiro(a) / Esteticista \\
+Kaishain & 会社員 (かいしゃいん) & Funcionário(a) de empresa \\
+\bottomrule
+\end{tabularx}
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=jppurple!6, colframe=jppurple, title=\textbf{Dinâmica em Grupo}, fonttitle=\bfseries]
+\small
+Em grupos de 2 a 3 pessoas, utilizem a estrutura do diálogo do Mário e da Takahashi para criarem a sua própria apresentação:
+\begin{enumerate}[leftmargin=*]
+    \item Cumprimente seu colega e faça a saudação inicial (\textit{Hajimemashite}).
+    \item Diga seu nome e pergunte o nome do colega (\textit{O-namae wa?}).
+    \item Apresente sua profissão ou curso universitário usando a partícula \textbf{no} (\textit{ex: UTFPR no gakusei desu}).
+    \item Finalize trocando cartões fictícios e usando \textit{Yoroshiku onegaishimasu}.
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{center}
+    \small\color{gray} \textit{Otsukaresama deshita! (Bom trabalho! Até a próxima aula.)}
+\end{center}
+
 \end{document}
