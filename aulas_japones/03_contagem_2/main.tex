@@ -2,14 +2,31 @@
 
 \usepackage[brazil]{babel}
 \usepackage{fontspec}
-\usepackage{xeCJK}
+\usepackage{textcomp}
 \usepackage{xcolor}
-\usepackage{ruby}
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif CJK JP} 
 \usepackage{amsmath}
 \usepackage{tcolorbox}
 \usepackage{enumitem}
 \usepackage{tabularx}
 \usepackage{booktabs}
+\usepackage{fancybox}   
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{calc}
+\newcommand{\lacuna}[1]{\underline{\hspace{\widthof{#1}}}}
+% \CJKruby não existe no xeCJK puro; implementamos furigana manualmente com TikZ
+% (tikz já é carregado no preâmbulo, então não precisa de pacote extra como pxrubrica/ruby).
+\newcommand{\CJKruby}[2]{%
+  \tikz[baseline=(rbbase.base)]{%
+    \node[inner sep=0pt] (rbbase) {#1};%
+    \node[above=0.15em of rbbase, font=\tiny, inner sep=0pt] {#2};%
+  }%
+}
+\newcommand{\ruby}[2]{\CJKruby{#1}{#2}}
+
+
 
 \setmainfont{Latin Modern Roman}
 \setCJKmainfont{Noto Serif CJK JP}
@@ -27,145 +44,650 @@
     \includegraphics[height=2cm, keepaspectratio]{../Seishun.png}\\
     \vspace{0.3cm}
     {\LARGE\bfseries 第三課}\\[4pt]
-    \small Comida, Bebida e Preferências
 \end{center}
 
 \vspace{0.3cm}
 \hrule height 1pt
 \vspace{0.5cm}
 
-\begin{tcolorbox}[colback=jppurple!6, colframe=jppurple, title=\textbf{Dica Cultural \& Etiqueta à Mesa}, fonttitle=\bfseries]
-\small
-Antes de comer no Japão, diz-se \textbf{Itadakimasu} (いただきます --- expressão de gratidão pelo alimento que também pode ser usada ao receber algo de alguém, como um presente). Ao terminar, diz-se \textbf{Gochisousama deshita} (ごちそうさまでした). Para expressar que gosta de algo, usamos a partícula \textbf{ga} com o adjetivo \textbf{Suki} (好き).
-\end{tcolorbox}
+\section*{Enfoques de Linguagem: Modo de Contagem}
+\subsection*{Modo de Contagem}
+Em japonês, existem diversos tipos de sufixos de contagem, usados de acordo com a natureza dos objetos que se vai contar.
 
-\vspace{0.2cm}
+\subsubsection*{Coisas materiais em geral}
+\begin{tabular}{llllll}
+1 & \ruby{一}{ひと}つ & hitotsu & 6 & \ruby{六}{むっ}つ & muttsu \\
+2 & \ruby{二}{ふた}つ & futatsu & 7 & \ruby{七}{なな}つ & nanatsu \\
+3 & \ruby{三}{みっ}つ & mittsu & 8 & \ruby{八}{やっ}つ & yattsu \\
+4 & \ruby{四}{よっ}つ & yottsu & 9 & \ruby{九}{ここの}つ & kokonotsu \\
+5 & \ruby{五}{いつ}つ & itsutsu & 10 & \ruby{十}{とお} & too \\
+? & \ruby{幾}{いく}つ & ikutsu & & &
+\end{tabular}
+
+\subsubsection*{Pessoas}
+\begin{tabular}{llllll}
+1 & \ruby{一}{ひと}り & hitori & 6 & \ruby{六}{ろく}\ruby{人}{にん} & roku-nin \\
+2 & \ruby{二}{ふた}り & futari & 7 & \ruby{七}{なな}\ruby{人}{にん} / \ruby{七}{しち}\ruby{人}{にん} & nana-nin / shichi-nin \\
+3 & \ruby{三}{さん}\ruby{人}{にん} & san-nin & 8 & \ruby{八}{はち}\ruby{人}{にん} & hachi-nin \\
+4 & \ruby{四}{よ}\ruby{人}{にん} & yo-nin & 9 & \ruby{九}{きゅう}\ruby{人}{にん} & kyuu-nin \\
+5 & \ruby{五}{ご}\ruby{人}{にん} & go-nin & 10 & \ruby{十}{じゅう}\ruby{人}{にん} & juu-nin \\
+? & \ruby{何}{なん}\ruby{人}{にん} & nan-nin & & &
+\end{tabular}
+
+\subsubsection*{Andares de um edifício}
+\begin{tabular}{llllll}
+1 & \ruby{一}{いっ}\ruby{階}{かい} & ik-kai & 6 & \ruby{六}{ろっ}\ruby{階}{かい} & rok-kai \\
+2 & \ruby{二}{に}\ruby{階}{かい} & ni-kai & 7 & \ruby{七}{なな}\ruby{階}{かい} & nana-kai \\
+3 & \ruby{三}{さん}\ruby{階}{がい} & san-gai & 8 & \ruby{八}{はっ}\ruby{階}{かい} & hak-kai \\
+4 & \ruby{四}{よん}\ruby{階}{かい} & yon-kai & 9 & \ruby{九}{きゅう}\ruby{階}{かい} & kyuu-kai \\
+5 & \ruby{五}{ご}\ruby{階}{かい} & go-kai & 10 & \ruby{十}{じゅっ}\ruby{階}{かい} & juk-kai \\
+? & \ruby{何}{なん}\ruby{階}{かい} & nan-kai & & &
+\end{tabular}
+\noindent\textit{Nota: No Japão, o andar térreo é considerado o primeiro andar.}
+
+
+\subsubsection*{Coisas pequenas / Copo ou xícara de bebidas}
+\begin{tabular}{llll}
+1 & \ruby{一}{いっ}\ruby{個}{こ} ik-ko & 1 & \ruby{一}{いっ}\ruby{杯}{ぱい} ip-pai \\
+2 & \ruby{二}{に}\ruby{個}{こ} ni-ko & 2 & \ruby{二}{に}\ruby{杯}{はい} ni-hai \\
+3 & \ruby{三}{さん}\ruby{個}{こ} san-ko & 3 & \ruby{三}{さん}\ruby{杯}{ばい} san-bai \\
+4 & \ruby{四}{よん}\ruby{個}{こ} yon-ko & 4 & \ruby{四}{よん}\ruby{杯}{はい} yon-hai \\
+5 & \ruby{五}{ご}\ruby{個}{こ} go-ko & 5 & \ruby{五}{ご}\ruby{杯}{はい} go-hai \\
+6 & \ruby{六}{ろっ}\ruby{個}{こ} rok-ko & 6 & \ruby{六}{ろっ}\ruby{杯}{ぱい} rop-pai \\
+7 & \ruby{七}{なな}\ruby{個}{こ} nana-ko & 7 & \ruby{七}{なな}\ruby{杯}{はい} nana-hai \\
+8 & \ruby{八}{はっ}\ruby{個}{こ} hak-ko & 8 & \ruby{八}{はっ}\ruby{杯}{ぱい} hap-pai \\
+9 & \ruby{九}{きゅう}\ruby{個}{こ} kyuu-ko & 9 & \ruby{九}{きゅう}\ruby{杯}{はい} kyuu-hai \\
+10 & \ruby{十}{じゅっ}\ruby{個}{こ} juk-ko & 10 & \ruby{十}{じゅっ}\ruby{杯}{ぱい} jup-pai \\
+? & \ruby{何}{なん}\ruby{個}{こ} nan-ko & ? & \ruby{何}{なん}\ruby{杯}{はい} nan-bai
+\end{tabular}
 
 \noindent
-\small
-\begin{tabularx}{\textwidth}{c X X X}
-\toprule
-\textbf{Nº} & \textbf{Objetos Planos/Folhas (枚)} & \textbf{Bebidas/Copos (杯)} & \textbf{Andares (階)} \\
-\midrule
-1 & 一枚 (ichi-mai) & 一杯 (ip-pai) & 一階 (ik-kai) \\
-2 & 二枚 (ni-mai) & 二杯 (ni-hai) & 二階 (ni-kai) \\
-3 & 三枚 (san-mai) & 三杯 (san-bai) & 三階 (san-gai) \\
-4 & 四枚 (yon-mai) & 四杯 (yon-hai) & 四階 (yon-kai) \\
-5 & 五枚 (go-mai) & 五杯 (go-hai) & 五階 (go-kai) \\
-6 & 六枚 (roku-mai) & 六杯 (rok-pai) & 六階 (rok-kai) \\
-7 & 七枚 (nana-mai) & 七杯 (nana-hai) & 七階 (nana-kai) \\
-8 & 八枚 (hachi-mai) & 八杯 (hap-pai) & 八階 (hak-kai) \\
-9 & 九枚 (kyū-mai) & 九杯 (kyū-hai) & 九階 (kyū-kai) \\
-10 & 十枚 (jū-mai) & 十杯 (jup-pai) & 十階 (juk-kai) \\
-\midrule
-\textbf{Perg.} & 何枚 (nan-mai?) & 何杯 (nan-bai?) & 何階 (nan-gai?) \\
-\bottomrule
-\end{tabularx}
+\textbf{Centenas (100 -- 900):}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item 100: \ruby{百}{ひゃく} (hyaku)
+    \item 200: \ruby{二}{に}\ruby{百}{ひゃく} (ni-hyaku)
+    \item 300: \ruby{三}{さん}\ruby{百}{びゃく} (san-byaku)
+    \item 400: \ruby{四}{よん}\ruby{百}{ひゃく} (yon-hyaku)
+    \item 500: \ruby{五}{ご}\ruby{百}{ひゃく} (go-hyaku)
+    \item 600: \ruby{六}{ろく}\ruby{百}{ぴゃく} (rop-pyaku)
+    \item 700: \ruby{七}{なな}\ruby{百}{ひゃく} (nana-hyaku)
+    \item 800: \ruby{八}{はち}\ruby{百}{ぴゃく} (hap-pyaku)
+    \item 900: \ruby{九}{きゅう}\ruby{百}{ひゃく} (kyuu-hyaku)
+\end{itemize}
 
-\vspace{0.3cm}
-\textit{Nota cultural: Evita-se a leitura \textbf{shi} para o número 4 devido à homofonia com a palavra morte (死 - shi). No lugar, utiliza-se \textbf{yon}.}
+\vspace{0.4em}
+\noindent
+\textbf{Milhares (1.000 -- 9.000):}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item 1.000: \ruby{千}{せん} (sen)
+    \item 2.000: \ruby{二}{に}\ruby{千}{せん} (ni-sen)
+    \item 3.000: \ruby{三}{さん}\ruby{千}{ぜん} (san-zen)
+    \item 4.000: \ruby{四}{よん}\ruby{千}{せん} (yon-sen)
+    \item 5.000: \ruby{五}{ご}\ruby{千}{せん} (go-sen)
+    \item 6.000: \ruby{六}{ろく}\ruby{千}{せん} (roku-sen)
+    \item 7.000: \ruby{七}{なな}\ruby{千}{せん} (nana-sen)
+    \item 8.000: \ruby{八}{はっ}\ruby{千}{せん} (has-sen)
+    \item 9.000: \ruby{九}{きゅう}\ruby{千}{せん} (kyuu-sen)
+\end{itemize}
 
-\newpage
+\vspace{0.4em}
+\noindent
+\textbf{Dezenas de Milhar e Centenas de Milhar:}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item 10.000: \ruby{一}{いち}\ruby{万}{まん} (ichi-man)
+    \item 100.000: \ruby{十}{じゅう}\ruby{万}{まん} (juu-man)
+\end{itemize}
 
+\subsection*{Preços}
+A moeda japonesa é o iene (\textyen{}).
+\begin{tabular}{lll}
+\textyen{}1 & \ruby{一}{いち}\ruby{円}{えん} & ichi-en \\
+\textyen{}10 & \ruby{十}{じゅう}\ruby{円}{えん} & juu-en \\
+\textyen{}100 & \ruby{百}{ひゃく}\ruby{円}{えん} & hyaku-en \\
+\textyen{}1,000 & \ruby{千}{せん}\ruby{円}{えん} & sen-en \\
+\textyen{}10,000 & \ruby{一}{いち}\ruby{万}{まん}\ruby{円}{えん} & ichi-man-en \\
+\textyen{}? & \ruby{幾}{いく}ら & ikura
+\end{tabular}
+
+
+\vspace{1em}
+\subsection*{Você sabe como pronunciar os seguintes números?}
+\begin{itemize}
+    \item 9: \ruby{九}{きゅう} 
+    \item 23: \ruby{二}{に}\ruby{十}{じゅう}\ruby{三}{さん} 
+    \item 416: \ruby{四}{よん}\ruby{百}{ひゃく}\ruby{十}{じゅう}\ruby{六}{ろく} 
+    \item 7,890: \ruby{七}{なな}\ruby{千}{せん}\ruby{八}{はっ}\ruby{百}{ぴゃく}\ruby{九}{きゅう}\ruby{十}{じゅう} 
+    \item 72,341: \ruby{七}{なな}\ruby{万}{まん}\ruby{二}{に}\ruby{千}{せん}\ruby{三}{さん}\ruby{百}{びゃく}\ruby{四}{よん}\ruby{十}{じゅう}\ruby{一}{いち} 
+    \item 618,905: \ruby{六}{ろく}\ruby{十}{じゅう}\ruby{一}{いち}\ruby{万}{まん}\ruby{八}{はっ}\ruby{千}{せん}\ruby{九}{きゅう}\ruby{百}{ひゃく}\ruby{五}{ご} 
+\end{itemize}
+
+\subsection*{Como falar números de telefone}
+Como em português, cada número deve ser pronunciado separadamente. O hífen entre os números é falado \textbf{``no''}.
+
+\vspace{1em}
 \begin{center}
-    {\LARGE\bfseries 会話 (Diálogo Resumido no Restaurante)}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+4 & 1 & $-$ & 9 & 8 & 8 & 3 & 0 & $-$ & 8 & 6 & 8 & 8 \\
+\hline
+\ruby{よん}{yon} & \ruby{いち}{ichi} & の & \ruby{きゅう}{kyuu} & \ruby{はち}{hachi} & \ruby{はち}{hachi} & \ruby{さん}{san} & \ruby{ぜろ}{zero} & の & \ruby{はち}{hachi} & \ruby{ろく}{roku} & \ruby{はち}{hachi} & \ruby{はち}{hachi} \\
+\hline
+yon & ichi & no & kyuu & hachi & hachi & san & zero & no & hachi & roku & hachi & hachi \\
+\hline
+\end{tabular}
 \end{center}
 
-\textit{Cenário: Tanaka e Himari chegam ao restaurante, fazem o pedido com o atendente e pagam a conta.}
+
+\begin{center}
+    { Notas Gramaticais}
+\end{center}
 
 \vspace{0.8em}
 
-\textbf{\ruby{店員}{てんいん}:} いらっしゃいませ！何名様ですか？\\
-\textit{Ten'in:} Irasshaimase! Nan-mei-sama desu ka?\\
-Atendente: Seja bem-vindo! Quantas pessoas?
+\noindent\textbf{1. \textasciitilde はここ／そこ／あそここです。 \textasciitilde wa koko/soko/asoko desu.} \\
+\textbf{(Indicando a localização de um determinado objeto)}
 
-\vspace{0.4em}
+\vspace{0.3em}
+\noindent Estas expressões são usadas para indicar a localização de alguma coisa em relação à posição do interlocutor ou do ouvinte.
 
-\textbf{\ruby{田中}{たなか}:} 二人です。テーブル席でお願いします。\\
-\textit{Tanaka:} Futari desu. Tēburu-seki de onegaishimasu.\\
-Tanaka: Duas pessoas. Na mesa, por favor.
+\begin{itemize}
+    \item \textbf{ここ koko} = próximo ao interlocutor
+    \item \textbf{そこ soko} = próximo ao ouvinte
+    \item \textbf{あそこ asoko} = longe do interlocutor e do ouvinte
+\end{itemize}
 
-\vspace{0.4em}
+\vspace{0.5em}
 
-\textbf{\ruby{店員}{てんいん}:} ご注文はお決まりですか？\\
-\textit{Ten'in:} Go-chuumon wa o-kimari desu ka?\\
-Atendente: Já decidiram o pedido?
+\noindent Quando você quer perguntar onde está um determinado objeto, você pode usar a seguinte expressão: \\
+\textbf{\textasciitilde はどこですか。 \textasciitilde wa doko desu ka. Onde posso encontrar \textasciitilde?}
 
-\vspace{0.4em}
+\vspace{0.5em}
 
-\textbf{\ruby{ひまり}:} おすすめは何ですか？\\
-\textit{Himari:} Osusume wa nan desu ka?\\
-Himari: Qual é a recomendação?
+\noindent\textbf{Exemplos:}
 
-\vspace{0.4em}
+\vspace{0.3em}
 
-\textbf{\ruby{店員}{てんいん}:} 和牛ステーキが人気です。\\
-\textit{Ten'in:} Wagū sutēki ga ninki desu.\\
-Atendente: O bife de Wagyu é muito popular.
+\textbf{A:} かばんはどこですか。\\
+\textit{Kaban wa doko desu ka.} \\
+\textit{A:} \lacuna{Onde posso encontrar malas?}
 
-\vspace{0.4em}
+\vspace{0.3em}
 
-\textbf{\ruby{田中}{たなか}:} じゃあ、ステーキを二つと、ウーロン茶を二杯お願いします。\\
-\textit{Tanaka:} Jaa, sutēki wo futatsu to, oorongcha wo ni-hai onegaishimasu.\\
-Tanaka: Então, dois bifes e dois copos de chá oolong, por favor.
+\textbf{B:} かばんはここです。\\
+\textit{Kaban wa koko desu.} \\
+\textit{B:} \lacuna{As malas estão aqui.}
 
-\vspace{0.6em}
+\vspace{0.3em}
 
-\textbf{\ruby{田中}{たなか}:} すみません、お会計をお願いします。\\
-\textit{Tanaka:} Sumimasen, o-kaikei wo onegaishimasu.\\
-Tanaka: Com licença, a conta, por favor.
+\textbf{A:} \ruby{魚}{さかな}はどこですか。\\
+\textit{Sakana wa doko desu ka.} \\
+\textit{A:} \lacuna{Onde posso encontrar peixes?}
 
-\vspace{0.4em}
+\vspace{0.3em}
 
-\textbf{\ruby{店員}{てんいん}:} 一緒にしますか？別々にしますか？\\
-\textit{Ten'in:} Issho ni shimasu ka? Betsubetsu ni shimasu ka?\\
-Atendente: O pagamento será junto ou separado?
+\textbf{B:} \ruby{魚}{さかな}はそこです。\\
+\textit{Sakana wa soko desu.} \\
+\textit{B:} \lacuna{Os peixes estão aí.}
 
-\vspace{0.4em}
+\vspace{0.3em}
 
-\textbf{\ruby{田中}{たなか}:} 一緒でお願いします。\\
-\textit{Tanaka:} Issho de onegaishimasu.\\
-Tanaka: Junto, por favor.
+\textbf{A:} ペンはどこですか。\\
+\textit{Pen wa doko desu ka.} \\
+\textit{A:} \lacuna{Onde posso encontrar canetas?}
+
+\vspace{0.3em}
+
+\textbf{B:} ペンはあそこです。\\
+\textit{Pen wa asoko desu.} \\
+\textit{B:} \lacuna{As canetas estão lá.}
+
+\vspace{0.8em}
+
+\noindent\textbf{Nota:} As expressões seguintes são usadas para indicar um objeto por meio de sua posição em relação ao interlocutor e ao ouvinte:
+\begin{itemize}
+    \item \textbf{これ kore} = isto (próximo ao interlocutor)
+    \item \textbf{それ sore} = isso (próximo ao ouvinte)
+    \item \textbf{あれ are} = aquilo (longe do interlocutor e do ouvinte)
+\end{itemize}
+
+\vspace{1em}
+
+\noindent\textbf{Vocabulário:} \\
+かばん (kaban) mala \quad \ruby{魚}{さかな} (sakana) peixe \quad ペン (pen) caneta
+
+
+\noindent\textbf{2. \textasciitilde は\textasciitilde の\ruby{前}{まえ}/\ruby{後}{うし}ろ/\ruby{近}{ちか}くです。 \textasciitilde wa \textasciitilde no mae/ushiro/chikaku desu.} \\
+\textbf{(Indicando a posição de uma determinada coisa)}
+
+\vspace{0.3em}
+\noindent Estas expressões são usadas para indicar a posição de uma determinada coisa em relação à outra.
+
+\vspace{0.3em}
+\noindent\textbf{Exemplos:}
+\begin{itemize}
+    \item レジの\ruby{前}{まえ}です。 \quad Reji no mae desu. \quad \lacuna{(Está) em frente à caixa registradora.}
+    \item \ruby{果}{か}\ruby{物}{もの}の\ruby{後}{うし}ろです。 \quad Kudamono no ushiro desu. \quad \lacuna{(Está) atrás das frutas.}
+    \item \ruby{入}{い}\ruby{り}{り}\ruby{口}{ぐち}の\ruby{近}{ちか}くです。 \quad Iriguchi no chikaku desu. \quad \lacuna{(Está) perto da entrada.}
+\end{itemize}
+
+\vspace{0.8em}
+
+\noindent\textbf{3. \textasciitilde (を) ください。 \textasciitilde (o) kudasai. (Por favor, dê-me \textasciitilde.)} \\
+\noindent Esta expressão (que literalmente significa ``dê-me \textasciitilde'') é usada quando você decide comprar algo.
+
+\vspace{0.8em}
+
+\noindent\textbf{4. \textasciitilde はありますか。 \textasciitilde wa arimasu ka. (O senhor (Você) tem \textasciitilde?)} \\
+\noindent Esta é uma expressão para perguntar se o produto que você está procurando existe na loja, como se mostra a seguir nos diálogos entre um freguês e um vendedor.
+
+\vspace{0.3em}
+\noindent\textbf{Exemplos:}
+
+\textbf{A:} たばこはありますか。\\
+\textit{Tabako wa arimasu ka.} \\
+\textit{A:} \lacuna{O senhor tem cigarros aqui?}
+
+\vspace{0.3em}
+
+\textbf{B:} はい。\\
+\textit{Hai.} \\
+\textit{B:} \lacuna{Sim, tenho.}
+
+\vspace{0.3em}
+
+\textbf{A:} かみそりはありますか。\\
+\textit{Kamisori wa arimasu ka.} \\
+\textit{A:} \lacuna{O senhor tem aparelhos de barbear aqui?}
+
+\vspace{0.3em}
+
+\textbf{B:} かみそりはちょっと。\\
+\textit{Kamisori wa chotto.} \\
+\textit{B:} \lacuna{Não, sinto muito.}
+
+\vspace{0.8em}
+
+\noindent\textbf{5. いくらですか。 Ikura desu ka. (Quanto custa \textasciitilde?)} \\
+\noindent Este é o modo típico de se perguntar o preço de alguma coisa.
+
+\vspace{0.3em}
+\noindent\textbf{Exemplos:}
+
+\textbf{A:} これ、いくらですか。\\
+\textit{Kore, ikura desu ka.} \\
+\textit{A:} \lacuna{Quanto custa isto?}
+
+\vspace{0.3em}
+
+\textbf{B:} 200\ruby{円}{えん}です。\\
+\textit{200-en desu.} \\
+\textit{B:} \lacuna{Custa 200 ienes.}
+
+\vspace{0.3em}
+
+\textbf{A:} ティッシュ、いくらですか。\\
+\textit{Tisshu, ikura desu ka.} \\
+\textit{A:} \lacuna{Quanto custa o lenço-papel?}
+
+\vspace{0.3em}
+
+\textbf{B:} 160\ruby{円}{えん}です。\\
+\textit{160-en desu.} \\
+\textit{B:} \lacuna{Custa 160 ienes.}
+
+\vspace{1em}
+
+\noindent\textbf{Vocabulário:} \\
+\ruby{後}{うし}ろ ushiro atrás \quad \ruby{近}{ちか}く chikaku perto/próximo \quad \ruby{果}{か}\ruby{物}{もの} kudamono frutas \quad \ruby{入}{い}\ruby{り}{り}\ruby{口}{ぐち} iriguchi entrada \quad たばこ tabako cigarros \quad かみそり kamisori aparelhos de barbear \quad ティッシュ tisshu lenço-papel
+
+
+\noindent\textbf{Exercícios}
+
+\vspace{0.5em}
+\noindent\textbf{1. Ligue as figuras com as palavras.}
+
+\begin{itemize}
+    \item[(1)] ここです。 \quad Koko desu. ( \quad )
+    \item[(2)] そこです。 \quad Soko desu. ( \quad )
+    \item[(3)] あそこです。 \quad Asoko desu. ( \quad )
+    \item[(4)] \ruby{入}{い}\ruby{り}{り}\ruby{口}{ぐち}の\ruby{近}{ちか}くです。 \quad Iriguchi no chikaku desu. ( \quad )
+    \item[(5)] レジの\ruby{前}{まえ}です。 \quad Reji no mae desu. ( \quad )
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{I2.png}
+    \caption{figuras.}
+    \label{fig:figura}
+\end{figure}
+
+\vspace{0.8em}
+
+\noindent\textbf{2. Agora você está indo comprar os produtos listados abaixo.}
+
+\noindent
+\begin{center}
+\ovalbox{
+  \begin{minipage}{0.95\textwidth}
+    \textbf{Lista de compras:}\\
+    \ruby{例}{れい} \textbf{Ree}: \ruby{洗}{せん}\ruby{剤}{ざい} \textit{senzai} \quad 
+    \textcircled{1} \ruby{歯}{は}\ruby{ブ}{ぶ}\ruby{ラ}{ら}\ruby{シ}{し} \textit{haburashi} \quad 
+    \textcircled{2} タオル \textit{taoru} \quad 
+    \textcircled{3} \ruby{果}{か}\ruby{物}{もの} \textit{kudamono}
+  \end{minipage}
+}
+\end{center}
+\vspace{0.3em}
+\noindent (1) Tendo como referência o desenho da loja abaixo, pergunte a localização dos itens da lista.
+
+\vspace{0.3em}
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{あなた :} あのう、すみません。\\
+\phantom{\textbf{あなた :}} (\ruby{洗}{せん}\ruby{剤}{ざい}) はどこですか。\\
+\textbf{店 員 :} (レジの\ruby{前}{まえ}) です。\\
+\textbf{あなた :} (レジの\ruby{前}{まえ}) ですね。どうも。
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{Anata:} Anoo, sumimasen.\\
+\phantom{\textbf{Anata:}} (Senzai) wa doko desu ka.\\
+\textbf{Ten'in:} (Reji no mae) desu.\\
+\textbf{Anata:} (Reji no mae) desu ne. Doomo.
+\end{minipage}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{I1.png}
+    \caption{Planta da loja e disposição dos produtos.}
+    \label{fig:loja}
+\end{figure}
+
+\vspace{1em}
+\noindent\textbf{Vocabulário e Expressões:}
+\begin{itemize}[noitemsep, topsep=4pt]
+    \item \ruby{洗}{せん}\ruby{剤}{ざい} (\textit{senzai}) -- detergente
+    \item \ruby{歯}{は}\ruby{ブ}{ぶ}\ruby{ラ}{ら}\ruby{シ}{し} (\textit{haburashi}) -- escova de dentes
+    \item タオル (\textit{taoru}) -- toalha
+    \item \textbf{\ruby{買}{か}\\\ruby{得}{どく}} (\textit{okaidoku}) -- compra vantajosa (ótimo preço / boa compra)
+    \item \textbf{\ruby{激}{げき}\ruby{安}{やす}} (\textit{gekiyasu}) -- preço super baixo / barato demais
+    \item \textbf{\ruby{大}{だい}\ruby{感}{かん}\ruby{謝}{しゃ}\ruby{祭}{さい}} (\textit{dai-kanshasai}) -- grande festival de agradecimento (liquidação especial)
+    \item \textbf{3\ruby{割}{わり}\ruby{引}{びき}} (\textit{3-waribiki}) -- 30\% de desconto
+    \item \textbf{セール} (\textit{seeru}) -- venda de liquidação (sale)
+    \item \textbf{\ruby{半}{はん}\ruby{額}{がく}} (\textit{hangaku}) -- metade do preço
+\end{itemize}
 
 \newpage
 
-\subsection*{Vocabulário e Frases Úteis do Atendente (\textit{Ten'in no Kotoba})}
+\begin{center}
+     I.会話 em um supermercado / Perguntando onde encontrar um determinado produto
+\end{center}
 
-\vspace{0.2cm}
+\vspace{0.8em}
 
+\textbf{\ruby{リ}{り} \ruby{サ}{さ}:} あのう、すみません。\\
+\textit{Risa:} Anoo, sumimasen.\\
+\textit{Lisa:} \lacuna{Com licença.}
+
+\vspace{0.5em}
+
+\textbf{\ruby{リ}{り} \ruby{サ}{さ}:} せっけんはどこですか。\\
+\textit{Risa:} Sekken wa doko desu ka.\\
+\textit{Lisa:} \lacuna{Onde posso encontrar sabonete?}
+\vspace{0.5em}
+
+\textbf{\ruby{店}{てん}\ruby{員}{いん}:} ええと、あそこです。\\
+\textit{Ten'in:} Eeto, asoko desu.\\
+\textit{Funcionário:}\lacuna{Olha, está lá adiante.}
+
+\vspace{0.5em}
+
+\textbf{\ruby{リ}{り} \ruby{サ}{さ}:} あそこ？\\
+\textit{Risa:} Asoko?\\
+\textit{Lisa:} \lacuna{Lá adiante?}
+
+\vspace{0.5em}
+
+\textbf{\ruby{店}{てん}\ruby{員}{いん}:} ええ。レジの\ruby{前}{まえ}です。\\
+\textit{Ten'in:} Ee. Reji no mae desu.\\
+\textit{Funcionário:} \lacuna{Sim. Em frente à caixa registradora.}
+\vspace{0.5em}
+
+\textbf{\ruby{リ}{り} \ruby{サ}{さ}:} レジの\ruby{前}{まえ}ですね。 どうも。\\
+\textit{Risa:} Reji no mae desu ne. Doomo.\\
+\textit{Lisa:} \lacuna{ Ah, sim, em freme à caixa registradora. Muito obrigada.}
+
+
+\newpage
+\begin{center}
+     II. 会話 em um quiosque / Perguntando o preço.
+\end{center}
+
+\vspace{0.8em}
+
+\textbf{アリ:} これ、ください。\\
+\textit{Ari:} Kore, kudasai.\\
+\textit{Ali:} \lacuna{Eu gostaria de comprar isto.}
+
+\vspace{0.5em}
+
+\textbf{\ruby{店}{てん}\ruby{員}{いん}:} はい。\\
+\textit{Ten'in:} Hai.\\
+\textit{Funcionário:} \lacuna{Pois não.}
+
+\vspace{0.5em}
+
+\textbf{アリ:} いくらですか。\\
+\textit{Ari:} Ikura desu ka.\\
+\textit{Ali:} \lacuna{Quanto custa?}
+
+\vspace{0.5em}
+
+\textbf{\ruby{店}{てん}\ruby{員}{いん}:} 220\ruby{円}{えん}です。\\
+\textit{Ten'in:} 220-en desu.\\
+\textit{Funcionário:} \lacuna{220 ienes.}
+
+\vspace{0.5em}
+
+\textbf{アリ:} はい。\textit{(Ele paga.)} どうも。\\
+\textit{Ari:} Hai. \textit{(Ele paga.)} Doomo.\\
+\textit{Ali:} \lacuna{Aqui está. \textit{(Ele paga.)} Obrigado.}
+\newpage
+\begin{center}
+    III.会話 na recepção de um hotel / Perguntando se há disponibilidade de uma determinada coisa.
+\end{center}
+
+\vspace{0.8em}
+
+\textbf{[Disponível]}
+
+\vspace{0.3em}
+
+\textbf{ロバート:} あのう、テレホンカード、ありますか。\\
+\textit{Robaato:} Anoo, terehon-kaado, arimasu ka.\\
+\textit{Robert:} \lacuna{Tem cartão telefônico aqui?}
+
+\vspace{0.4em}
+
+\textbf{\ruby{ホ}{ほ}\ruby{テ}{て}\ruby{ル}{る}の\ruby{人}{ひと}:} はい。こちらです。\\
+\textit{Hoteru no hito:} Hai. Kochira desu.\\
+\textit{Recepcionista:} \lacuna{Sim. Aqui está.}
+
+\vspace{0.4em}
+
+\textbf{ロバート:} じゃ、それ、ください。\\
+\textit{Robaato:} Ja, sore, kudasai.\\
+\textit{Robert:} \lacuna{Então, dê-me este.}
+
+\vspace{0.8em}
+
+\textbf{[Não disponível]}
+
+\vspace{0.3em}
+
+\textbf{ロバート:} あのう、テレホンカード、ありますか。\\
+\textit{Robaato:} Anoo, terehon-kaado, arimasu ka.\\
+\textit{Robert:} \lacuna{Tem cartão telefônico aqui?}
+
+\vspace{0.4em}
+
+\textbf{\ruby{ホ}{ほ}\ruby{テ}{て}\ruby{ル}{る}の\ruby{人}{ひと}:} テレホンカードはちょっと。\\
+\textit{Hoteru no hito:} Terehon-kaado wa chotto.\\
+\textit{Recepcionista:} \lacuna{Não, não tem.}
+
+\vspace{0.4em}
+
+\textbf{ロバート:} そうですか。どうも。\\
+\textit{Robaato:} Soo desu ka. Doomo.\\
+\textit{Robert:} \lacuna{É mesmo? Obrigado.}
+\newpage
+
+\vspace{1em}
 \noindent
-\small
-\begin{tabularx}{\textwidth}{>{\bfseries\color{jpnavy}}l X X}
-\toprule
-Expressão (Romaji) & Japônio (Kanji / Kana) & Tradução em Português \\
-\midrule
-O-seki ga go-youi dekimasu & お席がご用意できます & Sua mesa está pronta \\
-O-nomimono wa ikaga desu ka? & お飲み物はいかがですか？ & Aceitam algo para beber? \\
-O-matase shimashita & お待たせしました & Desculpe a demora / Aqui está \\
-Shou-shou o-machi kudasaai & 少々お待ちください & Aguarde um momento \\
-O-mizu wa ikaga desu ka? & お水はいかがですか？ & Deseja água? \\
-Subete daijoubu desu ka? & すべて大丈夫ですか？ & Está tudo certo? \\
-O-mochikaeri-you ni shimasu ka? & お持ち帰り用にしますか？ & Deseja embalar para levar? \\
-Mata no o-koshi wo omachi shimasu & またのお越しをお待ちしております & Aguardamos o seu retorno \\
-\bottomrule
-\end{tabularx}
+\textbf{Vocabulário:}
+\begin{itemize}[noitemsep, topsep=0pt]
+    \item \ruby{牛}{ぎゅう}\ruby{肉}{にく} (gyuuniku) -- carne de vaca
+    \item \ruby{豚}{ぶた}\ruby{肉}{niku} (butaniku) -- carne de porco
+    \item \ruby{鳥}{とり}\ruby{肉}{niku} (toriniku) -- frango
+    \item \ruby{魚}{さかな} (sakana) -- peixe
+    \item \ruby{魚}{さかな}\ruby{貝}{かい}\ruby{類}{るい} (gyokairui) -- frutos do mar
+    \item エビグラタン (ebi-guratan) -- camarão gratinado
+    \item サラダ (sarada) -- salada
+    \item ビーフカレー (biifu-karee) -- caril de carne de vaca (curry)
+    \item お\ruby{飲}{の}み\ruby{物}{もの} (onomimono) -- bebida
+    \item コーヒー (koohii) -- café
+\end{itemize}
+
+\begin{center}
+     I. 会話 em um restaurante / Chamando o garçom (a garçonete)
+\end{center}
+
+\vspace{0.8em}
+
+\textbf{\ruby{ア}{あ}\ruby{リ}{り}:} 済みません。\\
+\textit{Ari:} Sumimasen.\\
+\textit{Ali:} \lacuna{Por favor.}
+
+\vspace{0.5em}
+
+\textbf{\ruby{店}{てん}\ruby{員}{いん}:} はい。お待たせしました。\\
+\textit{Ten'in:} Hai. O-matase shimashita.\\
+\textit{Garçonete:} \lacuna{Sim, senhor. Desculpe-me por tê-lo feito esperar.}
+
+\vspace{1.5em}
+
+\begin{center}
+     II. 会話 Pedido
+\end{center}
+
+\vspace{0.8em}
+
+\textbf{\ruby{ア}{あ}\ruby{リ}{り}:} エビグラタンとサラダ。\\
+\textit{Ari:} Ebi-guratan to sarada.\\
+\textit{Ali:} \lacuna{Um camarão gratinado e uma salada.}
+
+\vspace{0.5em}
+
+\textbf{\ruby{店}{てん}\ruby{員}{いん}:} はい。\\
+\textit{Ten'in:} Hai.\\
+\textit{Garçonete:} \lacuna{Sim, senhor.}
+
+\vspace{0.5em}
+
+\textbf{\ruby{李}{り}:} これは\ruby{何}{なん}ですか。\textit{(Apontando o cardápio)} \\
+\textit{Ri:}  Kore wa nan desu ka.\\
+\textit{Li:} \lacuna{ O que é isto?}
+
+\vspace{0.5em}
+
+\textbf{\ruby{店}{てん}\ruby{員}{いん}:} ビーフカレーです。\\
+\textit{Ten'in:} Biifu-karee desu.\\
+\textit{Garçonete:} \lacuna{É um caril de carne de vaca.}
+
+\vspace{0.5em}
+
+\textbf{\ruby{李}{り}:} じゃ、これ、お\ruby{願}{ねが}いします。\\
+\textit{Ri:} Ja, kore, onegai-shimasu.\\
+\textit{Li:} \lacuna{Então, quero este.}
+
+\vspace{0.5em}
+
+\textbf{\ruby{店}{てん}\ruby{員}{いん}:} お\ruby{飲}{の}み\ruby{物}{もの}はよろしいですか。\\
+\textit{Ten'in:} O-nomimono wa yoroshii desu ka.\\
+\textit{Garçonete:} \lacuna{Alguma coisa para beber?}
+
+\vspace{0.5em}
+
+\textbf{\ruby{ア}{あ}\ruby{リ}{り}:} ええと、コーヒー。\\
+\textit{Ari:} Eeto, koohii.\\
+\textit{Ali:} \lacuna{Bem, eu quero um café.}
+
+\vspace{0.5em}
+
+\textbf{\ruby{李}{り}:} コーヒー2つ、お\ruby{願}{ねが}いします。\\
+\textit{Ri:} Koohii futatsu, onegai-shimasu.\\
+\textit{Li:} \lacuna{Dois cafés, por favor.}
+
+\vspace{0.5em}
+
+\textbf{\ruby{店}{てん}\ruby{員}{いん}:} \ruby{以}{い}\ruby{上}{じょう}でよろしいですか。\\
+\textit{Ten'in:} Ijoo de yoroshii desu ka.\\
+\textit{Garçonete:} \lacuna{Isso é tudo?}
+
+\vspace{0.5em}
+
+\textbf{\ruby{ア}{あ}\ruby{リ}{り}:} はい。\\
+\textit{Ari:} Hai.\\
+\textit{Ali:} \lacuna{Sim.}
+
+\vspace{1.5em}
+
+\begin{center}
+     III. 会話 Reclamando da demora
+\end{center}
+
+\vspace{0.8em}
+
+\textbf{\ruby{ア}{あ}\ruby{リ}{り}:} 済みません。\\
+\textit{Ari:} Sumimasen.\\
+\textit{Ali:} \lacuna{Por favor!}
+
+\vspace{0.5em}
+
+\textbf{\ruby{店}{てん}\ruby{員}{いん}:} はい。\\
+\textit{Ten'in:} Hai.\\
+\textit{Garçonete:} \lacuna{Sim.}
+
+\vspace{0.5em}
+
+\textbf{\ruby{ア}{あ}\ruby{リ}{り}:} あのう、エビグラタン、まだですか。\\
+\textit{Ari:} Anoo, ebi-guratan, mada desu ka.\\
+\textit{Ali:} \lacuna{O camarão gratinado ainda não está pronto?}
+
+\vspace{0.5em}
+
+\textbf{\ruby{店}{てん}{いん}:} あ、\ruby{申}{もう}\ruby{訳}{わけ}ありません。すぐできます。\\
+\textit{Ten'in:} A, mooshiwake arimasen. Sugu dekimasu.\\
+\textit{Garçonete:} \lacuna{Desculpe-me. Já será servido.}\\
+
+\vspace{0.3em}
+\noindent
+\textbf{Vocabulário para conversação}
+\begin{itemize}[noitemsep, topsep=5pt]
+    \item \textbf{O-seki ga go-youi dekimasu} -- お席がご用意できます -- Sua mesa está pronta
+    \item \textbf{O-nomimono wa ikaga desu ka?} -- お飲み物はいかがですか？ -- Aceitam algo para beber?
+    \item \textbf{O-matase shimashita} -- お待たせしました -- Desculpe a demora / Aqui está
+    \item \textbf{Shou-shou o-machi kudasaai} -- 少々お待ちください -- Aguarde um momento
+    \item \textbf{O-mizu wa ikaga desu ka?} -- お水はいかがですか？ -- Deseja água?
+    \item \textbf{Subete daijoubu desu ka?} -- すべて大丈夫ですか？ -- Está tudo certo?
+    \item \textbf{O-mochikaeri-you ni shimasu ka?} -- お持ち帰り用にしますか？ -- Deseja embalar para levar?
+    \item \textbf{Mata no o-koshi wo omachi shimasu} -- またのお越しをお待ちしております -- Aguardamos o seu retorno
+\end{itemize}
 
 \vspace{0.5cm}
 
-\begin{tcolorbox}[colback=jppurple!6, colframe=jppurple, title=\textbf{Dinâmica em Grupo (Simulação de Restaurante)}, fonttitle=\bfseries]
-\small
-Em trios (1 Atendente, 2 Clientes), pratiquem a recepção, o pedido e o pagamento:
-\begin{enumerate}[leftmargin=*]
-    \item \textbf{Entrada:} O atendente pergunta o número de pessoas (\textit{Nan-mei-sama?}) e a preferência de assento.
-    \item \textbf{Pedido:} Os clientes perguntam sugestões (\textit{Osusume wa nan desu ka?}) e fazem o pedido com a partícula \textbf{wo} (\textit{ex: O-mizu wo onegaishimasu}).
-    \item \textbf{Pagamento:} Peçam a conta com \textit{"O-kaikei wo onegaishimasu"} e decidam se pagarão juntos (\textit{Issho}) ou separado (\textit{Betsubetsu}).
-\end{enumerate}
-\end{tcolorbox}
-
-\vspace{0.4cm}
-
 \begin{center}
-    \small\color{gray} \textit{お疲れ様でした！(Otsukaresama deshita!)}
+    \small \textit{お疲れ様でした！}
 \end{center}
 
 \end{document}
